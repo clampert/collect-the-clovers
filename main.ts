@@ -1,4 +1,5 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    hero.startEffect(effects.fire, 60000)
     music.play(music.stringPlayable("F G E D G E F D ", 120), music.PlaybackMode.InBackground)
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -129,11 +130,12 @@ info.onScore(randint(130, 200), function () {
     game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.hearts, 100)
+    otherSprite.destroy(effects.hearts, 500)
     music.baDing.play()
     info.changeScoreBy(1)
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    hero.startEffect(effects.disintegrate, 1000)
     music.play(music.stringPlayable("A B G B C5 A G C5 ", 120), music.PlaybackMode.InBackground)
     scene.setBackgroundImage(img`
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
@@ -260,16 +262,17 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     scene.setBackgroundColor(4)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.fire, 100)
+    otherSprite.destroy(effects.disintegrate, 100)
     music.pewPew.play()
-    info.changeScoreBy(1)
+    info.changeScoreBy(10)
     info.changeLifeBy(-1)
 })
 let bee: Sprite = null
 let clover: Sprite = null
+let hero: Sprite = null
 scene.setBackgroundImage(assets.image`background`)
 game.setGameOverMessage(true, "🐍Das ist ja der Hammer 🔨😮")
-let hero = sprites.create(assets.image`hero`, SpriteKind.Player)
+hero = sprites.create(assets.image`hero`, SpriteKind.Player)
 hero.setStayInScreen(true)
 controller.moveSprite(hero, 100, 100)
 game.setGameOverMessage(false, "GAME OVER!")
