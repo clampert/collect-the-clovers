@@ -3,7 +3,8 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "clover": "github:kiki-lee/clover-images"
+        "clover": "github:kiki-lee/clover-images",
+        "controller": "*"
     },
     "files": [
         "main.blocks",
